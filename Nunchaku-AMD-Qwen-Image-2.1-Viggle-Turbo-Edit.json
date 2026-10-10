@@ -162,7 +162,7 @@
       "widgets_values": [
         "Change the teapot to blue. Keep its shape, background, lighting and camera angle.",
         "blurry, distorted, low quality",
-        512
+        1024
       ]
     },
     {
@@ -335,7 +335,7 @@
       "widgets_values": [
         true,
         123,
-        "fixed",
+        "randomize",
         1.0
       ]
     },
