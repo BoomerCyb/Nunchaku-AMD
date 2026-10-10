@@ -123,13 +123,14 @@ class NunchakuAMDQwen21EditEncode:
         return {'required': {'clip': ('CLIP',), 'vae': ('VAE',), 'image': ('IMAGE',),
                              'prompt': ('STRING', {'multiline': True}),
                              'negative_prompt': ('STRING', {'multiline': True, 'default': ''}),
-                             'resolution': ('INT', {'default':512,'min':32,'max':4096,'step':32})},
+                             'resolution': ('INT', {'default':1024,'min':32,'max':4096,'step':32,
+                                             'tooltip':'Reference images are resized to about resolution x resolution. For chained edits, sample every edit with a new seed: reusing the seed of the step that made the reference replays its noise (grainy, compounding backgrounds).'})},
                 'optional': {'image_2': ('IMAGE',), 'image_3': ('IMAGE',)}}
     RETURN_TYPES = ('CONDITIONING','CONDITIONING','LATENT')
     RETURN_NAMES = ('positive','negative','latent')
     FUNCTION = 'encode'
     CATEGORY = 'Nunchaku AMD/RX 9070 XT only'
-    DESCRIPTION = 'Qwen 2.1 reference editing: encodes images through the vision encoder and VAE. Use the Qwen 2.1 INT4 loader.'
+    DESCRIPTION = 'Qwen 2.1 reference editing: encodes images through the vision encoder and VAE. Use the Qwen 2.1 INT4 loader. Use a new sampler seed for each edit; reusing the seed that made the reference replays its noise.'
 
     def encode(self, clip, vae, image, prompt, negative_prompt, resolution, image_2=None, image_3=None):
         from comfy_extras.nodes_qwen import TextEncodeQwenImage21

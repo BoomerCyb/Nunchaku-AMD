@@ -28,7 +28,10 @@ other variants are not implied by a family name.
 NVIDIA numerical parity is unverified. Packed INT4/FP4 weights are decoded
 for BF16/FP16 compute; native NVIDIA INT4/NVFP4 instructions are not used.
 Arbitrary LoRA merging is unsupported; Viggle Turbo uses its dedicated
-runtime adapter. Large models require substantial system RAM and VRAM.
+runtime adapter. Qwen 2.1 chained edits (using an output as the next
+reference) need a new seed for every edit: reusing the seed of the step
+that made the reference "replays" its noise, and the background turns
+grainy and compounds. The edit workflow randomizes the seed for this. Large models require substantial system RAM and VRAM.
 No full model weights are included. The small fixture is for diagnosis only.
 
 ## Sources and licenses
